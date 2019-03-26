@@ -2,9 +2,16 @@ package com.lemmeknow;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 
-@SpringBootApplication(scanBasePackages = "com.lemmeknow")
+@SpringBootApplication
+@EnableAuthorizationServer
 public class Application {
+//    @RequestMapping("/user")
+//    public Principal user(Principal user) {
+//        return user;
+//    }
+
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
