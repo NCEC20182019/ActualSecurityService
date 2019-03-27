@@ -17,8 +17,8 @@ INSERT INTO oauth_client_details (client_id, client_secret, web_server_redirect_
      (4,1), /* delete admin */
      (2,2),  /* read operator */
      (3,2);  /* update operator */
-insert into "user" (id, username, password, email, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked)
-  VALUES ('1', 'marqueez','{bcrypt}$2y$10$Dk1SaUYfoDzs.FQQnKFh/.7uecubERVT8xIfqqSCrrAyNmPcQLRu2', 'k@krishantha.com', '1', '0', '0', '0');
+insert into "user" (username, password, email, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked)
+  VALUES ('marqueez','{bcrypt}$2y$10$Dk1SaUYfoDzs.FQQnKFh/.7uecubERVT8xIfqqSCrrAyNmPcQLRu2', 'dominiqewilkins@gmail.com', '1', '1', '1', '1');
 
 INSERT INTO ROLE_USER (ROLE_ID, USER_ID)
     VALUES
