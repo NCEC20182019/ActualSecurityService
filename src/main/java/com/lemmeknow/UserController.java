@@ -31,4 +31,9 @@ public class UserController {
     public UserDetails putUser(@RequestBody User user){
         return userDetailsService.saveUser(user);
     }
+
+    @RequestMapping(value = "user/get", method = RequestMethod.GET)
+    public String putUser(){
+        return "page";
+    }
 }
