@@ -22,13 +22,15 @@ public class UserController {
         return user;
     }
 
-    @RequestMapping(value = "user/{id}", method = RequestMethod.GET)
-    public UserDetails getUser(@PathVariable Integer id) {
-        return userDetailsService.getUserById(id);
-    }
-
     @RequestMapping(value = "user/put", method = RequestMethod.POST)
     public UserDetails putUser(@RequestBody User user){
         return userDetailsService.saveUser(user);
+    }
+
+    @RequestMapping(value = "user/{id}", method = RequestMethod.GET)
+    public UserDetails getUser(@PathVariable Integer id) {
+
+        UserDetails userById = userDetailsService.getUserById(id);
+        return userById;
     }
 }
