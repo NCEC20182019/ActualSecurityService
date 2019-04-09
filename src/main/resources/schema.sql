@@ -26,14 +26,14 @@ create table if not exists role (
 );
 
 create table if not exists "user" (
-  id serial not null,
+  id SERIAL not null,
   username varchar(100) not null unique,
   password varchar(1024) not null,
   email varchar(1024) not null unique,
-  enabled smallint not null,
-  accountNonExpired smallint not null,
-  credentialsNonExpired smallint not null,
-  accountNonLocked smallint not null,
+  enabled boolean not null default true,
+  accountNonExpired boolean not null default true,
+  credentialsNonExpired boolean not null default true,
+  accountNonLocked boolean not null default true,
   preffered_notify varchar(8) not null default 'NONE',
   phone_number varchar(16) default null,
   primary key (id)
@@ -47,8 +47,6 @@ create table  if not exists permission_role (
   constraint permission_role_ibfk_1 foreign key (permission_id) references permission (id),
   constraint permission_role_ibfk_2 foreign key (role_id) references role (id)
 );
-
-
 
 create table if not exists role_user (
   role_id int default null,

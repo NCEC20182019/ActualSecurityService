@@ -9,6 +9,5 @@ public interface UserDetailsRepository extends JpaRepository<User, Integer> {
 
     Optional<User> findByEmail(String email);
 
-
-
+    <S extends User> S save(S entity);
 }

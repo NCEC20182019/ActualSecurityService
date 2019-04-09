@@ -8,7 +8,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.el.PropertyNotFoundException;
 import java.util.Optional;
 
 @Service("userDetailsService")
@@ -27,5 +30,20 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         UserDetails userDetails = new com.lemmeknow.model.UserDetails(optionalUser.get());
         new AccountStatusUserDetailsChecker().check(userDetails);
         return userDetails;
+    }
+
+    public UserDetails getUserById(Integer id) throws PropertyNotFoundException{
+
+        Optional<User> optionalUser = userDetailsRepository.findById(id);
+
+        optionalUser.orElseThrow(() -> new PropertyNotFoundException("Bad credentials"));
+
+        UserDetails userDetails = new com.lemmeknow.model.UserDetails(optionalUser.get());
+        new AccountStatusUserDetailsChecker().check(userDetails);
+        return userDetails;
+    }
+
+    public UserDetails saveUser(User user){
+        return new com.lemmeknow.model.UserDetails(userDetailsRepository.save(user));
     }
 }

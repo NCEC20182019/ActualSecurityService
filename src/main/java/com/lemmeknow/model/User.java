@@ -19,7 +19,7 @@ import java.util.List;
 @Data
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     private Integer id;
 
@@ -38,7 +38,7 @@ public class User {
     @Column(name="accountNonLocked")
     private boolean accountNonLocked;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name="role_user",
             joinColumns = {@JoinColumn(name="user_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name="role_id", referencedColumnName = "id")})
@@ -50,6 +50,7 @@ public class User {
     }
 
     public User(User user) {
+        this.id = user.id;
         this.username = user.username;
         this.password = user.password;
         this.email = user.email;
