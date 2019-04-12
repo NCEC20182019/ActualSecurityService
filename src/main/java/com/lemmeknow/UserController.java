@@ -1,7 +1,6 @@
 package com.lemmeknow;
 
 import com.lemmeknow.model.User;
-import com.lemmeknow.service.RoleService;
 import com.lemmeknow.service.UserDetailsServiceImpl;
 import netscape.security.Principal;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +19,6 @@ public class UserController {
     @Autowired
     UserDetailsServiceImpl userDetailsService;
 
-    @Autowired
-    RoleService roleService;
-
     @RequestMapping("user/me")
     public Principal user(Principal user) {
         return user;
@@ -40,16 +36,12 @@ public class UserController {
         user.setCredentialsNonExpired(true);
         user.setEnabled(true);
 
-//        Integer roleId = roleService.getRoleIdByName(body.get("role"));
-
         UserDetails savedUser = userDetailsService.saveUser(user);
-
-        //МАГИЯ ПО ДОБАВЛЕНИЮ РОЛИ
 
         return savedUser;
     }
 
-    @RequestMapping(value = "user/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "user/{id:int}", method = RequestMethod.GET)
     public UserDetails getUser(@PathVariable Integer id) {
         return userDetailsService.getUserById(id);
     }
