@@ -17,6 +17,8 @@ import javax.sql.DataSource;
 @Configuration
 public class AuthorizationServerConfiguration implements AuthorizationServerConfigurer {
 
+    public static final String RESOURCE_ID = "users";
+
     @Autowired
     private PasswordEncoder passwordEncoder;
 
