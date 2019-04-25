@@ -13,8 +13,9 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/user/put").permitAll()
-                .antMatchers("/user/{id}").access("#oauth2.hasScope('profile')")
-                .anyRequest().authenticated();
+                .antMatchers("/user/{id}").authenticated()
+                .antMatchers("/user/me").authenticated()
+                .anyRequest().permitAll();
     }
 
     @Override
