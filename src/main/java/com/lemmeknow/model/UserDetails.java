@@ -1,5 +1,6 @@
 package com.lemmeknow.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
@@ -9,6 +10,7 @@ import java.util.List;
 
 public class UserDetails extends User
         implements org.springframework.security.core.userdetails.UserDetails {
+
     public UserDetails() {
     }
 
@@ -16,6 +18,7 @@ public class UserDetails extends User
         super(user);
     }
 
+    @JsonIgnore
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> grantedAuthorityList = new ArrayList<>();
@@ -31,8 +34,19 @@ public class UserDetails extends User
     }
 
     @Override
+    public Integer getId(){
+        return super.getId();
+    }
+
+    @JsonIgnore
+    @Override
     public String getPassword() {
         return  super.getPassword();
+    }
+
+    @Override
+    public String getEmail(){
+        return super.getEmail();
     }
 
     @Override
@@ -40,21 +54,25 @@ public class UserDetails extends User
         return super.getUsername();
     }
 
+    @JsonIgnore
     @Override
     public boolean isAccountNonExpired() {
         return super.isAccountNonExpired();
     }
 
+    @JsonIgnore
     @Override
     public boolean isAccountNonLocked() {
         return super.isAccountNonLocked();
     }
 
+    @JsonIgnore
     @Override
     public boolean isCredentialsNonExpired() {
         return super.isCredentialsNonExpired();
     }
 
+    @JsonIgnore
     @Override
     public boolean isEnabled() {
         return super.isEnabled();

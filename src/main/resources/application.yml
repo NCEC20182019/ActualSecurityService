@@ -23,7 +23,11 @@ spring:
                 show_sql: true
                 format_sql: true
 
-logging:
+
+                jdbc:
+                    lob:
+                        non_contextual_creation: true
     level:
         org.springframework.security: DEBUG
         org.springframework.web: DEBUG
+
