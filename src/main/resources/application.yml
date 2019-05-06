@@ -7,23 +7,20 @@ server:
 
 spring:
     datasource:
-        url: jdbc:postgresql://localhost:5432/lemmeknow-security
-        username: postgres
-        password: Yfevtyrj1
+        url: jdbc:postgresql://localhost:5432/securityDB
+        username: nc-admin
+        password: 123
         driver-class-name: org.postgresql.Driver
-        initialization-mode: always
     jpa:
         hibernate:
             naming:
                 physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-        generate-ddl: false
+            ddl-auto: update
         properties:
             hibernate:
                 dialect: org.hibernate.dialect.PostgreSQL92Dialect
                 show_sql: true
                 format_sql: true
-
-
                 jdbc:
                     lob:
                         non_contextual_creation: true
