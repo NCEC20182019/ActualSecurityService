@@ -11,11 +11,28 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "permission")
-@Data
+//@Data
 public class Permission {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     @Column(name = "name")
     private String name;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    @SuppressWarnings("WeakerAccess")
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
