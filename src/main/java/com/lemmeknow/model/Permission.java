@@ -1,6 +1,6 @@
 package com.lemmeknow.model;
 
-import lombok.Data;
+//import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
