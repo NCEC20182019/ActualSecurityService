@@ -1,4 +1,4 @@
-package com.lemmeknow;
+package com.lemmeknow.controller;
 
 import com.lemmeknow.model.User;
 import com.lemmeknow.service.UserDetailsServiceImpl;
@@ -45,7 +45,8 @@ public class UserController {
 //        }else{
         user.setUsername(body.get("username").split("@")[0]);
 //        }
-        user.setPassword(passwordEncoder.encode(body.get("password")).replaceFirst("\\$2.", "$2a"));
+        String password = passwordEncoder.encode(body.get("password"));
+        user.setPassword(password);
         user.setAccountNonExpired(true);
         user.setAccountNonLocked(true);
         user.setCredentialsNonExpired(true);
