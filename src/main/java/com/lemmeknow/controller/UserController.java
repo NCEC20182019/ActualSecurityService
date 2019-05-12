@@ -15,10 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.security.Principal;
 import java.util.Map;
 
-@CrossOrigin
+@CrossOrigin(origins = "*")
 @RestController
 public class UserController {
 
@@ -28,6 +27,7 @@ public class UserController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @CrossOrigin(origins = "*")
     @RequestMapping("user/me")
     public Principal user(Principal user) {
         return user;
@@ -57,6 +57,7 @@ public class UserController {
         return savedUser;
     }
 
+    @CrossOrigin(origins = "*")
     @RequestMapping(value = "user/{id}", method = RequestMethod.GET)
     public UserDetails getUser(@PathVariable Integer id) {
         return userDetailsService.getUserById(id);
