@@ -56,7 +56,7 @@ public class UserController {
         }else {
             user.setEmail(body.get("email"));
             user.setUsername(body.get("email").split("@")[0]);
-            password = body.get("password");
+            password = passwordEncoder.encode(body.get("password"));
         }
 
         user.setPassword(password);
