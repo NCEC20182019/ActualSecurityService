@@ -8,10 +8,10 @@ server:
 spring:
     datasource:
         url: jdbc:postgresql://localhost:5432/securityDB
-        username: nc-admin  # Prod
-        password: 123       # Prod
-#        username: postgres   # Local
-#        password: Yfevtyrj1  # Local
+        # username: nc-admin  # Prod
+        # password: 123       # Prod
+        username: postgres   # Local
+        password: Yfevtyrj1  # Local
         driver-class-name: org.postgresql.Driver
     jpa:
         hibernate:
@@ -27,5 +27,7 @@ spring:
                     lob:
                         non_contextual_creation: true
     level:
-        org.springframework.security: DEBUG
-        org.springframework.web: DEBUG
+        org:
+            springframework:
+                security: DEBUG
+                web: DEBUG

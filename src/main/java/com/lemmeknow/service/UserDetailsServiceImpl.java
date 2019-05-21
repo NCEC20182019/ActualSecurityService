@@ -1,10 +1,10 @@
 package com.lemmeknow.service;
 
 import com.lemmeknow.model.User;
+import com.lemmeknow.model.UserDetails;
 import com.lemmeknow.repository.UserDetailsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AccountStatusUserDetailsChecker;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;

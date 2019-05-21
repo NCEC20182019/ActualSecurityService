@@ -2,9 +2,9 @@ package com.lemmeknow.controller;
 
 import com.lemmeknow.model.Role;
 import com.lemmeknow.model.User;
+import com.lemmeknow.model.UserDetails;
 import com.lemmeknow.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import java.security.Principal;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -40,14 +40,23 @@ public class UserController {
     @ResponseBody
     public UserDetails putUser(@RequestBody Map<String, String> body){
 
+        UserDetails details = userDetailsService.getUserById(Integer.parseInt(body.get("id")));
+
+        if(!body.get("oldPassword").equals(""))
+            if(!passwordEncoder.matches(body.get("oldPassword"), details.getPassword()))
+                return details;
+
         User user = new User();
-        user.setEmail(body.get("username"));
+        if(!body.get("id").equals(""))
+            user.setId(Integer.parseInt(body.get("id")));
+        user.setEmail(!body.get("email").equals("") ? body.get("email") : details.getEmail() );
 //        if(body.get("username") != null) {
 //            user.setUsername(body.get("username"));
 //        }else{
-        user.setUsername(body.get("username").split("@")[0]);
+        user.setUsername(!body.get("username").equals("") ? body.get("username") :
+                (details != null ? (!details.getUsername().equals("") ? details.getUsername() : body.get("email").split("@")[0]) : body.get("email").split("@")[0]));
 //        }
-        String password = passwordEncoder.encode(body.get("password"));
+        String password = passwordEncoder.encode(!body.get("password").equals("") ? body.get("password") : body.get("oldPassword"));
         user.setPassword(password);
         user.setAccountNonExpired(true);
         user.setAccountNonLocked(true);

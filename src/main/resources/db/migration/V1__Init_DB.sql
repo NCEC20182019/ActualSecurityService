@@ -27,7 +27,7 @@ create table if not exists role (
 
 create table if not exists "user" (
   id SERIAL not null,
-  username varchar(100) not null unique,
+  username varchar(100) not null,
   password varchar(1024) not null,
   email varchar(1024) not null unique,
   enabled boolean not null default true,
