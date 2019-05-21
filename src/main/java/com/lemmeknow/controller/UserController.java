@@ -39,24 +39,26 @@ public class UserController {
     @CrossOrigin(origins = "*")
     @ResponseBody
     public UserDetails putUser(@RequestBody Map<String, String> body){
-
-        UserDetails details = userDetailsService.getUserById(Integer.parseInt(body.get("id")));
-
-        if(!body.get("oldPassword").equals(""))
-            if(!passwordEncoder.matches(body.get("oldPassword"), details.getPassword()))
-                return details;
-
         User user = new User();
-        if(!body.get("id").equals(""))
+        String password;
+
+        if(body.containsKey("id")) {
+            UserDetails details = userDetailsService.getUserById(Integer.parseInt(body.get("id")));
+            if (!body.get("oldPassword").equals(""))
+                if (!passwordEncoder.matches(body.get("oldPassword"), details.getPassword()))
+                    return details;
+
             user.setId(Integer.parseInt(body.get("id")));
-        user.setEmail(!body.get("email").equals("") ? body.get("email") : details.getEmail() );
-//        if(body.get("username") != null) {
-//            user.setUsername(body.get("username"));
-//        }else{
-        user.setUsername(!body.get("username").equals("") ? body.get("username") :
-                (details != null ? (!details.getUsername().equals("") ? details.getUsername() : body.get("email").split("@")[0]) : body.get("email").split("@")[0]));
-//        }
-        String password = passwordEncoder.encode(!body.get("password").equals("") ? body.get("password") : body.get("oldPassword"));
+            user.setEmail(!body.get("email").equals("") ? body.get("email") : details.getEmail());
+            user.setUsername(!body.get("username").equals("") ? body.get("username") :
+                    (details != null ? details.getUsername() : body.get("email").split("@")[0]));
+            password = passwordEncoder.encode(!body.get("password").equals("") ? body.get("password") : body.get("oldPassword"));
+        }else {
+            user.setEmail(body.get("email"));
+            user.setUsername(body.get("email").split("@")[0]);
+            password = body.get("password");
+        }
+
         user.setPassword(password);
         user.setAccountNonExpired(true);
         user.setAccountNonLocked(true);
