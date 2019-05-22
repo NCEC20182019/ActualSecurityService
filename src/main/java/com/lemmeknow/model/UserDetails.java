@@ -15,6 +15,7 @@ public class UserDetails extends User
     public UserDetails() {
     }
 
+    private String notificationChannel;
     public UserDetails(User user) {
         super(user);
     }
@@ -71,6 +72,14 @@ public class UserDetails extends User
     @Override
     public boolean isCredentialsNonExpired() {
         return super.isCredentialsNonExpired();
+    }
+
+    public String getNotificationChannel() {
+        return notificationChannel;
+    }
+
+    public void setNotificationChannel(String notificationChannel) {
+        this.notificationChannel = notificationChannel;
     }
 
     @JsonIgnore

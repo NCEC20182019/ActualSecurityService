@@ -38,7 +38,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         optionalUser.orElseThrow(() -> new PropertyNotFoundException("Bad credentials"));
 
-        UserDetails userDetails = new com.lemmeknow.model.UserDetails(optionalUser.get());
+        UserDetails userDetails = new UserDetails(optionalUser.get());
+        userDetails.setNotificationChannel("EMAIL");
         new AccountStatusUserDetailsChecker().check(userDetails);
         return userDetails;
     }
