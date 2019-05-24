@@ -6,16 +6,9 @@ import com.lemmeknow.model.UserDetails;
 import com.lemmeknow.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import java.security.Principal;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -59,6 +52,9 @@ public class UserController {
             password = passwordEncoder.encode(body.get("password"));
         }
 
+        // default notificationChannel
+        user.setNotificationChannel("EMAIL");
+
         user.setPassword(password);
         user.setAccountNonExpired(true);
         user.setAccountNonLocked(true);
@@ -71,9 +67,7 @@ public class UserController {
         roles.add(user_role);
         user.setRoles(roles);
 
-        UserDetails savedUser = userDetailsService.saveUser(user);
-
-        return savedUser;
+        return userDetailsService.saveUser(user);
     }
 
     @CrossOrigin(origins = "*")

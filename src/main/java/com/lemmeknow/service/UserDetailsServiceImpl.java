@@ -8,8 +8,6 @@ import org.springframework.security.authentication.AccountStatusUserDetailsCheck
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.el.PropertyNotFoundException;
 import java.util.Optional;
@@ -39,7 +37,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         optionalUser.orElseThrow(() -> new PropertyNotFoundException("Bad credentials"));
 
         UserDetails userDetails = new UserDetails(optionalUser.get());
-        userDetails.setNotificationChannel("EMAIL");
         new AccountStatusUserDetailsChecker().check(userDetails);
         return userDetails;
     }

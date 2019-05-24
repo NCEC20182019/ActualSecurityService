@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -15,7 +14,6 @@ public class UserDetails extends User
     public UserDetails() {
     }
 
-    private String notificationChannel;
     public UserDetails(User user) {
         super(user);
     }
@@ -56,6 +54,11 @@ public class UserDetails extends User
         return super.getUsername();
     }
 
+    @Override
+    public String getNotificationChannel() {
+        return super.getNotificationChannel();
+    }
+
     @JsonIgnore
     @Override
     public boolean isAccountNonExpired() {
@@ -72,14 +75,6 @@ public class UserDetails extends User
     @Override
     public boolean isCredentialsNonExpired() {
         return super.isCredentialsNonExpired();
-    }
-
-    public String getNotificationChannel() {
-        return notificationChannel;
-    }
-
-    public void setNotificationChannel(String notificationChannel) {
-        this.notificationChannel = notificationChannel;
     }
 
     @JsonIgnore
