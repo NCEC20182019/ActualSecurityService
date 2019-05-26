@@ -6,16 +6,9 @@ import com.lemmeknow.model.UserDetails;
 import com.lemmeknow.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import java.security.Principal;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -52,13 +45,14 @@ public class UserController {
             user.setEmail(!body.get("email").equals("") ? body.get("email") : details.getEmail());
             user.setUsername(!body.get("username").equals("") ? body.get("username") :
                     (details != null ? details.getUsername() : body.get("email").split("@")[0]));
+            user.setRoles(details.getRoles());
             password = passwordEncoder.encode(!body.get("password").equals("") ? body.get("password") : body.get("oldPassword"));
-            user.setPreferred_notify(body.get("preferred_notify"));
+            user.setNotification_channel(body.get("notification_channel"));
         }else {
             user.setEmail(body.get("email"));
             user.setUsername(body.get("email").split("@")[0]);
             password = passwordEncoder.encode(body.get("password"));
-            user.setPreferred_notify("email");
+            user.setNotification_channel("email");
             List<Role> roles = new ArrayList<>();
             Role user_role = new Role();
             user_role.setName("ROLE_user");
@@ -67,15 +61,14 @@ public class UserController {
             user.setRoles(roles);
         }
 
+
         user.setPassword(password);
         user.setAccountNonExpired(true);
         user.setAccountNonLocked(true);
         user.setCredentialsNonExpired(true);
         user.setEnabled(true);
 
-        UserDetails savedUser = userDetailsService.saveUser(user);
-
-        return savedUser;
+        return userDetailsService.saveUser(user);
     }
 
     @CrossOrigin(origins = "*")

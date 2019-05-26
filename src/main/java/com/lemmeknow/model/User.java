@@ -2,16 +2,7 @@ package com.lemmeknow.model;
 
 //import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
@@ -38,10 +29,10 @@ public class User implements Serializable {
     private boolean credentialsNonExpired;
     @Column(name="accountNonLocked")
     private boolean accountNonLocked;
-    @Column(name="preferred_notify")
-    private String preferred_notify;
+    @Column(name="notification_channel")
+    private String notification_channel;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name="role_user",
             joinColumns = {@JoinColumn(name="user_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name="role_id", referencedColumnName = "id")})
@@ -62,7 +53,7 @@ public class User implements Serializable {
         this.credentialsNonExpired = user.credentialsNonExpired;
         this.accountNonLocked = user.accountNonLocked;
         this.roles = user.roles;
-        this.preferred_notify = user.preferred_notify;
+        this.notification_channel = user.notification_channel;
     }
 
     public Integer getId() {
@@ -137,11 +128,11 @@ public class User implements Serializable {
         this.roles = roles;
     }
 
-    public String getPreferred_notify() {
-        return preferred_notify;
+    public String getNotification_channel() {
+        return notification_channel;
     }
 
-    public void setPreferred_notify(String preferred_notify) {
-        this.preferred_notify = preferred_notify;
+    public void setNotification_channel(String preferred_notify) {
+        this.notification_channel = preferred_notify;
     }
 }
