@@ -32,7 +32,7 @@ public class User implements Serializable {
     @Column(name="notification_channel")
     private String notification_channel;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name="role_user",
             joinColumns = {@JoinColumn(name="user_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name="role_id", referencedColumnName = "id")})
