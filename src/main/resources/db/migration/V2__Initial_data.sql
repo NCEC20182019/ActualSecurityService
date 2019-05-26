@@ -4,7 +4,7 @@ INSERT INTO oauth_client_details (client_id, client_secret, web_server_redirect_
     ('parser_service', '{bcrypt}$2a$12$HU2SKOk7O9ubgAv9HHUDt.uTT2xL6svF2DPF1szFpDFeOpkAh6Gwa', 'http://localhost:8094', 'profile', 3600, 10000, 'events', 'client_credentials'),
     ('scheduler_service', '{bcrypt}$2a$12$.8M7UW7ruyS8QQ/dNu8lJ.6REyLBToSSyZr/I70ysN.miaLNKSssm', 'http://localhost:8095', 'profile', 3600, 10000, 'events', 'client_credentials'),
     ('notification_service', '{bcrypt}$2a$10$gPhlXZfms0EpNHX0.HHptOhoFD1AoxSr/yUIdTqA8vtjeP4zi0DDu', 'http://localhost:8093', 'profile', 3600, 10000, 'users', 'authorization_code,password,refresh_token,implicit,client_credentials'),
-    ('client_service', '{bcrypt}$2a$12$fvO3jGsXa4yNoAq1YbuTNO6YfJ/qNdS9zug9aZ8V0b6Ry.7ACwCa6', 'http://localhost:8090', 'profile, user', 3600, 10000, 'users', 'authorization_code,password,refresh_token,implicit,client_credentials')
+    ('client_service', '{bcrypt}$2a$12$fvO3jGsXa4yNoAq1YbuTNO6YfJ/qNdS9zug9aZ8V0b6Ry.7ACwCa6', 'http://localhost:80', 'profile, user', 3600, 10000, 'users', 'authorization_code,password,refresh_token,implicit,client_credentials')
 ;
 
  INSERT INTO PERMISSION (NAME)
@@ -33,9 +33,9 @@ INSERT INTO oauth_client_details (client_id, client_secret, web_server_redirect_
 
 ;
 
-INSERT INTO "user" (username, password, email, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked)
+INSERT INTO "user" (username, password, email, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, preffered_notify)
   VALUES
-     ('marqueez','{bcrypt}$2a$10$Dk1SaUYfoDzs.FQQnKFh/.7uecubERVT8xIfqqSCrrAyNmPcQLRu2', 'dominiqewilkins@gmail.com', '1', '1', '1', '1')
+     ('marqueez','{bcrypt}$2a$10$Dk1SaUYfoDzs.FQQnKFh/.7uecubERVT8xIfqqSCrrAyNmPcQLRu2', 'dominiqewilkins@gmail.com', '1', '1', '1', '1', 'email')
 ;
 
 INSERT INTO ROLE_USER (ROLE_ID, USER_ID)

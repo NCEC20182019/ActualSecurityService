@@ -38,6 +38,8 @@ public class User implements Serializable {
     private boolean credentialsNonExpired;
     @Column(name="accountNonLocked")
     private boolean accountNonLocked;
+    @Column(name="preferred_notify")
+    private String preferred_notify;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name="role_user",
@@ -60,6 +62,7 @@ public class User implements Serializable {
         this.credentialsNonExpired = user.credentialsNonExpired;
         this.accountNonLocked = user.accountNonLocked;
         this.roles = user.roles;
+        this.preferred_notify = user.preferred_notify;
     }
 
     public Integer getId() {
@@ -132,5 +135,13 @@ public class User implements Serializable {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    public String getPreferred_notify() {
+        return preferred_notify;
+    }
+
+    public void setPreferred_notify(String preferred_notify) {
+        this.preferred_notify = preferred_notify;
     }
 }

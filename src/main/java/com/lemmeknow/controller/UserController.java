@@ -53,10 +53,18 @@ public class UserController {
             user.setUsername(!body.get("username").equals("") ? body.get("username") :
                     (details != null ? details.getUsername() : body.get("email").split("@")[0]));
             password = passwordEncoder.encode(!body.get("password").equals("") ? body.get("password") : body.get("oldPassword"));
+            user.setPreferred_notify(body.get("preferred_notify"));
         }else {
             user.setEmail(body.get("email"));
             user.setUsername(body.get("email").split("@")[0]);
             password = passwordEncoder.encode(body.get("password"));
+            user.setPreferred_notify("email");
+            List<Role> roles = new ArrayList<>();
+            Role user_role = new Role();
+            user_role.setName("ROLE_user");
+            user_role.setId(2);
+            roles.add(user_role);
+            user.setRoles(roles);
         }
 
         user.setPassword(password);
@@ -64,12 +72,6 @@ public class UserController {
         user.setAccountNonLocked(true);
         user.setCredentialsNonExpired(true);
         user.setEnabled(true);
-        List<Role> roles = new ArrayList<>();
-        Role user_role = new Role();
-        user_role.setName("ROLE_user");
-        user_role.setId(2);
-        roles.add(user_role);
-        user.setRoles(roles);
 
         UserDetails savedUser = userDetailsService.saveUser(user);
 
