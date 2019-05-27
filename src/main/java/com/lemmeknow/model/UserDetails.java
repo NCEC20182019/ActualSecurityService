@@ -55,8 +55,8 @@ public class UserDetails extends User
     }
 
     @Override
-    public String getNotification_channel() {
-        return super.getNotification_channel();
+    public String getNotificationChannel() {
+        return super.getNotificationChannel();
     }
 
     @JsonIgnore

@@ -30,7 +30,7 @@ public class User implements Serializable {
     @Column(name="accountNonLocked")
     private boolean accountNonLocked;
     @Column(name="notification_channel")
-    private String notification_channel;
+    private String notificationChannel;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name="role_user",
@@ -53,7 +53,7 @@ public class User implements Serializable {
         this.credentialsNonExpired = user.credentialsNonExpired;
         this.accountNonLocked = user.accountNonLocked;
         this.roles = user.roles;
-        this.notification_channel = user.notification_channel;
+        this.notificationChannel = user.notificationChannel;
     }
 
     public Integer getId() {
@@ -128,11 +128,11 @@ public class User implements Serializable {
         this.roles = roles;
     }
 
-    public String getNotification_channel() {
-        return notification_channel;
+    public String getNotificationChannel() {
+        return notificationChannel;
     }
 
-    public void setNotification_channel(String preferred_notify) {
-        this.notification_channel = preferred_notify;
+    public void setNotificationChannel(String preferred_notify) {
+        this.notificationChannel = preferred_notify;
     }
 }

@@ -35,7 +35,7 @@ INSERT INTO oauth_client_details (client_id, client_secret, web_server_redirect_
 
 INSERT INTO "user" (username, password, email, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, preffered_notify)
   VALUES
-     ('marqueez','{bcrypt}$2a$10$Dk1SaUYfoDzs.FQQnKFh/.7uecubERVT8xIfqqSCrrAyNmPcQLRu2', 'dominiqewilkins@gmail.com', '1', '1', '1', '1', 'email')
+     ('marqueez','{bcrypt}$2a$10$Dk1SaUYfoDzs.FQQnKFh/.7uecubERVT8xIfqqSCrrAyNmPcQLRu2', 'dominiqewilkins@gmail.com', '1', '1', '1', '1', 'EMAIL')
 ;
 
 INSERT INTO ROLE_USER (ROLE_ID, USER_ID)
