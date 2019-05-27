@@ -47,7 +47,7 @@ public class UserController {
                     (details != null ? details.getUsername() : body.get("email").split("@")[0]));
             user.setRoles(details.getRoles());
             password = passwordEncoder.encode(!body.get("password").equals("") ? body.get("password") : body.get("oldPassword"));
-            user.setNotificationChannel(body.get("notification_channel"));
+            user.setNotificationChannel(body.get("notificationChannel"));
         }else {
             user.setEmail(body.get("email"));
             user.setUsername(body.get("email").split("@")[0]);
