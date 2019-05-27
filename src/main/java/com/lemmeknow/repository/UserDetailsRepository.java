@@ -7,8 +7,6 @@ import java.util.Optional;
 
 public interface UserDetailsRepository extends JpaRepository<User, Integer> {
 
-    Optional<User> findById(Integer id);
     Optional<User> findByEmail(String email);
-
     <S extends User> S save(S entity);
 }
